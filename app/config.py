@@ -36,6 +36,24 @@ class Settings(BaseSettings):
         "https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token"
     )
 
+    # Namecheap API — https://www.namecheap.com/support/api/intro/
+    namecheap_api_user: str = ""
+    namecheap_api_key: str = ""
+    namecheap_username: str = ""
+    namecheap_client_ip: str = ""
+    namecheap_sandbox: bool = True
+
+    namecheap_contact_first_name: str = ""
+    namecheap_contact_last_name: str = ""
+    namecheap_contact_address1: str = ""
+    namecheap_contact_city: str = ""
+    namecheap_contact_state: str = ""
+    namecheap_contact_postal_code: str = ""
+    namecheap_contact_country: str = "US"
+    namecheap_contact_phone: str = ""
+    namecheap_contact_email: str = ""
+    namecheap_contact_organization: str = ""
+
     @field_validator(
         "contabo_client_id",
         "contabo_client_secret",
@@ -62,6 +80,29 @@ class Settings(BaseSettings):
                 self.contabo_client_secret,
                 self.contabo_api_user,
                 self.contabo_api_password,
+            ]
+        )
+
+    def namecheap_configured(self) -> bool:
+        return all(
+            [
+                self.namecheap_api_user,
+                self.namecheap_api_key,
+                self.namecheap_username,
+                self.namecheap_client_ip,
+            ]
+        )
+
+    def namecheap_contacts_configured(self) -> bool:
+        return all(
+            [
+                self.namecheap_contact_first_name,
+                self.namecheap_contact_last_name,
+                self.namecheap_contact_address1,
+                self.namecheap_contact_city,
+                self.namecheap_contact_state,
+                self.namecheap_contact_postal_code,
+                self.namecheap_contact_phone,
             ]
         )
 

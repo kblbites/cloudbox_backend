@@ -5,5 +5,7 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 cloudbox.db
+cloudbox.db-shm
+cloudbox.db-wal
 *.db
 .DS_Store
